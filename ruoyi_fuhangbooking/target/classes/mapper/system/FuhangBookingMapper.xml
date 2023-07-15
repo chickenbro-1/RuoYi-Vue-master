@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.fuhang_booking.mapper.FuhangBookingMapper">
+    
+    <resultMap type="FuhangBooking" id="FuhangBookingResult">
+        <result property="id"    column="id"    />
+        <result property="phone"    column="phone"    />
+        <result property="time"    column="time"    />
+        <result property="ticketType"    column="ticket_type"    />
+        <result property="number"    column="number"    />
+        <result property="authStatus"    column="auth_status"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="dealStatus"    column="deal_status"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="transferPhone"    column="transfer_phone"    />
+        <result property="accessToken"    column="access_token"    />
+        <result property="bizuserid"    column="bizuserid"    />
+        <result property="refreshtoken"    column="refreshtoken"    />
+        <result property="mtcuserid"    column="mtcuserid"    />
+    </resultMap>
+
+    <sql id="selectFuhangBookingVo">
+        select id, phone, time, ticket_type, number, auth_status, order_status, deal_status, order_id, transfer_phone, access_token, bizuserid, refreshtoken, mtcuserid from fuhang_booking
+    </sql>
+
+    <select id="selectFuhangBookingList" parameterType="FuhangBooking" resultMap="FuhangBookingResult">
+        <include refid="selectFuhangBookingVo"/>
+        <where>  
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="ticketType != null  and ticketType != ''"> and ticket_type = #{ticketType}</if>
+            <if test="number != null "> and number = #{number}</if>
+            <if test="authStatus != null  and authStatus != ''"> and auth_status = #{authStatus}</if>
+            <if test="orderStatus != null  and orderStatus != ''"> and order_status = #{orderStatus}</if>
+            <if test="dealStatus != null  and dealStatus != ''"> and deal_status = #{dealStatus}</if>
+            <if test="orderId != null  and orderId != ''"> and order_id = #{orderId}</if>
+            <if test="transferPhone != null  and transferPhone != ''"> and transfer_phone = #{transferPhone}</if>
+            <if test="accessToken != null  and accessToken != ''"> and access_token = #{accessToken}</if>
+            <if test="bizuserid != null  and bizuserid != ''"> and bizuserid = #{bizuserid}</if>
+            <if test="refreshtoken != null  and refreshtoken != ''"> and refreshtoken = #{refreshtoken}</if>
+            <if test="mtcuserid != null  and mtcuserid != ''"> and mtcuserid = #{mtcuserid}</if>
+        </where>
+    </select>
+    
+    <select id="selectFuhangBookingById" parameterType="Long" resultMap="FuhangBookingResult">
+        <include refid="selectFuhangBookingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFuhangBooking" parameterType="FuhangBooking" useGeneratedKeys="true" keyProperty="id">
+        insert into fuhang_booking
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="phone != null">phone,</if>
+            <if test="time != null">time,</if>
+            <if test="ticketType != null">ticket_type,</if>
+            <if test="number != null">number,</if>
+            <if test="authStatus != null">auth_status,</if>
+            <if test="orderStatus != null">order_status,</if>
+            <if test="dealStatus != null">deal_status,</if>
+            <if test="orderId != null">order_id,</if>
+            <if test="transferPhone != null">transfer_phone,</if>
+            <if test="accessToken != null">access_token,</if>
+            <if test="bizuserid != null">bizuserid,</if>
+            <if test="refreshtoken != null">refreshtoken,</if>
+            <if test="mtcuserid != null">mtcuserid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="phone != null">#{phone},</if>
+            <if test="time != null">#{time},</if>
+            <if test="ticketType != null">#{ticketType},</if>
+            <if test="number != null">#{number},</if>
+            <if test="authStatus != null">#{authStatus},</if>
+            <if test="orderStatus != null">#{orderStatus},</if>
+            <if test="dealStatus != null">#{dealStatus},</if>
+            <if test="orderId != null">#{orderId},</if>
+            <if test="transferPhone != null">#{transferPhone},</if>
+            <if test="accessToken != null">#{accessToken},</if>
+            <if test="bizuserid != null">#{bizuserid},</if>
+            <if test="refreshtoken != null">#{refreshtoken},</if>
+            <if test="mtcuserid != null">#{mtcuserid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFuhangBooking" parameterType="FuhangBooking">
+        update fuhang_booking
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="ticketType != null">ticket_type = #{ticketType},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="authStatus != null">auth_status = #{authStatus},</if>
+            <if test="orderStatus != null">order_status = #{orderStatus},</if>
+            <if test="dealStatus != null">deal_status = #{dealStatus},</if>
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="transferPhone != null">transfer_phone = #{transferPhone},</if>
+            <if test="accessToken != null">access_token = #{accessToken},</if>
+            <if test="bizuserid != null">bizuserid = #{bizuserid},</if>
+            <if test="refreshtoken != null">refreshtoken = #{refreshtoken},</if>
+            <if test="mtcuserid != null">mtcuserid = #{mtcuserid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFuhangBookingById" parameterType="Long">
+        delete from fuhang_booking where id = #{id}
+    </delete>
+
+    <delete id="deleteFuhangBookingByIds" parameterType="String">
+        delete from fuhang_booking where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
